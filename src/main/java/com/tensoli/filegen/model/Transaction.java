@@ -1,7 +1,7 @@
 package com.tensoli.filegen.model;
 
 public class Transaction extends Party {
-	String reference = "T"+System.nanoTime();
+	String reference = String.valueOf(System.nanoTime());
 	String currency;
 	Double amount;
 	String title;

@@ -1,8 +1,8 @@
 package com.tensoli.filegen.model;
 
 public class Message extends Party {
-	String senderReference = "S"+System.nanoTime();
-	String customerReference = "C"+System.nanoTime();
+	String senderReference = String.valueOf(System.nanoTime());
+	String customerReference = String.valueOf(System.nanoTime());
 	String executionDate;
 
 	public String getSenderReference() {

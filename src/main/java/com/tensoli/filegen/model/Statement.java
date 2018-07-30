@@ -1,7 +1,7 @@
 package com.tensoli.filegen.model;
 
-public class Statement {	
-	String reference = "S"+System.nanoTime();
+public class Statement {
+	String reference = String.valueOf(System.nanoTime());
 	String account;
 	String currency;
 	String openingDate;
@@ -9,6 +9,7 @@ public class Statement {
 	Integer number = 1;
 	Double openingBalance = 0.0;
 	Double closingBalance = 0.0;
+	
 	public String getReference() {
 		return reference;
 	}
