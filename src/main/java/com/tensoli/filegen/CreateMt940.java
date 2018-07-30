@@ -14,6 +14,7 @@ public class CreateMt940 extends AbstractCreator {
 		
 		Party p = new Party();
 		String code = parties.fillRandomParty(p);
+		String account = p.getAccount();
 		
 		FileWriter writer = new FileWriter(code + "/" + name);
 		
@@ -31,7 +32,7 @@ public class CreateMt940 extends AbstractCreator {
 			tx.setCurrency("CHF");
 			tx.setTitle("Payment");
 			tx.setAmount(1500.00);
-			parties.fillRandomParty(tx, code);
+			parties.fillRandomParty(tx, account);
 			
 			ser.serializeTransaction(stmt, tx, writer);
 		}

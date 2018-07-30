@@ -13,6 +13,7 @@ public class CreateMt101 extends AbstractCreator {
 		
 		Message msg = new Message();
 		String code = parties.fillRandomParty(msg);
+		String account = msg.getAccount();
 		msg.setExecutionDate(getDate());
 		
 		FileWriter writer = new FileWriter(code + "/" + name);
@@ -24,7 +25,7 @@ public class CreateMt101 extends AbstractCreator {
 			tx.setCurrency("CHF");
 			tx.setTitle("Payment");
 			tx.setAmount(1500.00);
-			parties.fillRandomParty(tx, code);
+			parties.fillRandomParty(tx, account);
 			
 			ser.serializeTransaction(msg, tx, writer);
 		}
