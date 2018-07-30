@@ -1,0 +1,19 @@
+{1:F01XXXXXXXXXXXX0000000000}{2:I101BCITITMMXCMUN}{4:
+:20:$message.senderReference
+:21R:$message.customerReference
+:28D:$count/$count
+:50H:/$message.account
+#if ($message.line1)
+$message.line1
+#end
+#if ($message.line2)
+$message.line2
+#end
+#if ($message.line4)
+$message.line3
+#end
+#if ($message.line4)
+$message.line4
+#end
+:52A:$message.bic
+:30:$message.executionDate

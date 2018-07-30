@@ -1,0 +1,6 @@
+{1:F01NDEASESSAXXX0833510237}{2:O9400325${statement.openingDate}NDEANOKKBXXX1270618906${statement.openingDate}0325N}{4:
+:20:$statement.reference
+:21:$statement.reference
+:25:$statement.account
+:28C:$statement.number
+:60F:C${statement.openingDate}${statement.currency}${statement.openingBalanceText}

@@ -1,0 +1,11 @@
+   			<TxInfAndSts>   
+				<OrgnlInstrId>$transaction.id</OrgnlInstrId>
+				<OrgnlEndToEndId>$transaction.endToEndId</OrgnlEndToEndId>    
+				<TxSts>ACCP</TxSts>  
+				<StsRsnInf> 
+					<Rsn>   
+						<Cd>NARR</Cd>    
+					</Rsn>   
+					<AddtlInf>CAP Invalid code or combinations in CategoryPurpose or ServiceLevel</AddtlInf>
+				</StsRsnInf>   
+			</TxInfAndSts> 	

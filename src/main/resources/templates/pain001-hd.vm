@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
+	<CstmrCdtTrfInitn>
+		<GrpHdr>
+			<MsgId>$message.senderReference</MsgId>
+			<CreDtTm>2018-03-13T07:45:52</CreDtTm>
+			<NbOfTxs>$count</NbOfTxs>
+			<CtrlSum>51476148.9</CtrlSum>
+			<InitgPty>
+				<Nm>Treuhand AG, Herr H. Muster</Nm>
+				<CtctDtls>
+					<Nm>CLX.PayMaker Office</Nm>
+					<Othr>3.0.98.0</Othr>
+				</CtctDtls>
+			</InitgPty>
+		</GrpHdr>
+		<PmtInf>
+			<PmtInfId>$message.customerReference</PmtInfId>
+			<PmtMtd>TRF</PmtMtd>
+			<BtchBookg>true</BtchBookg>
+			<PmtTpInf>
+				<CtgyPurp>
+					<Cd>SALA</Cd>
+				</CtgyPurp>
+			</PmtTpInf>
+			<ReqdExctnDt>2018-03-13</ReqdExctnDt>
+			<Dbtr>
+				<Nm>$message.name</Nm>
+			</Dbtr>
+			<DbtrAcct>
+				<Id>
+					<Othr>
+						<Id>$message.account</Id>
+					</Othr>
+				</Id>
+			</DbtrAcct>
+			<DbtrAgt>
+				<FinInstnId>
+					<BIC>$message.bic</BIC>
+				</FinInstnId>
+			</DbtrAgt>

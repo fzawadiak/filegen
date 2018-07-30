@@ -1,0 +1,19 @@
+:21:$transaction.reference
+:21F:NONREF
+:32B:$transaction.currency$transaction.amountText
+:57A:$transaction.bic
+:59:/$transaction.account
+#if ($transaction.line1)
+$transaction.line1
+#end
+#if ($transaction.line2)
+$transaction.line2
+#end
+#if ($transaction.line3)
+$transaction.line3
+#end
+#if ($transaction.line4)
+$transaction.line4
+#end
+:70:$transaction.title
+:71A:OUR
