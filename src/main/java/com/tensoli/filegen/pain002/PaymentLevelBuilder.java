@@ -1,7 +1,7 @@
 package com.tensoli.filegen.pain002;
 
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.Reader;
+import java.io.Writer;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -14,15 +14,15 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.tensoli.filegen.model.PaymentBlock;
 import com.tensoli.filegen.model.PaymentInfo;
 
-public class BuilderPain001 {
+public class PaymentLevelBuilder extends AbstractBuilder {
 	private class HandlerPain001 extends DefaultHandler {
-		private final StringWriter sw;
+		private final Writer sw;
 		private String currentElement;
 		private PaymentBlock pb;
 		private PaymentInfo pi;
 		private final SerializerPain002 out = new SerializerPain002();
 		
-		public HandlerPain001(StringWriter sw) {
+		public HandlerPain001(Writer sw) {
 			this.sw = sw;
 		}
 		
@@ -68,11 +68,9 @@ public class BuilderPain001 {
 		}
 		
 	}
-	public String parse(String msg) throws Exception {
+	public void parse(Reader in, Writer out) throws Exception {
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 	    SAXParser parser = spf.newSAXParser();
-	    StringWriter sw = new StringWriter();
-	    parser.parse(new InputSource(new StringReader(msg)), new HandlerPain001(sw));
-		return sw.toString();
+	    parser.parse(new InputSource(in), new HandlerPain001(out));
 	}
 }

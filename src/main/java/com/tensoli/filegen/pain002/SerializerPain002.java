@@ -12,23 +12,28 @@ import com.tensoli.filegen.model.PaymentBlock;
 import com.tensoli.filegen.model.PaymentInfo;
 
 public class SerializerPain002 {
+	Template full = Velocity.getTemplate("templates/pain002.vm");
 	Template header = Velocity.getTemplate("templates/pain002-hd.vm");
 	Template transaction = Velocity.getTemplate("templates/pain002-tx.vm");
 	Template footer = Velocity.getTemplate("templates/pain002-ft.vm");
-	
-	public String serialize(PaymentBlock msg, List<PaymentInfo> txs) {
+
+	public void serialize(PaymentBlock msg, Writer wr) {
 		VelocityContext context = new VelocityContext();
 		context.put("message", msg);
-		context.put("count", txs.size());
-
-		StringWriter sw = new StringWriter();
-		header.merge(context, sw);
-		for(PaymentInfo tx : txs) {
-			context.put("transaction", tx);
-			transaction.merge(context, sw);
-		}
-		footer.merge(context, sw);
+		
+		full.merge(context, wr);
+	}
 	
+	public String serialize(PaymentBlock msg, List<PaymentInfo> txs) {
+		StringWriter sw = new StringWriter();
+		
+		serializeHeader(msg, sw);
+		
+		for(PaymentInfo tx : txs)
+			serializeTransaction(tx, sw);
+		
+		serializeFooter(msg, sw);
+		
 		return sw.toString();
 	}
 	

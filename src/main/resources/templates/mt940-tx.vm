@@ -1,18 +1,5 @@
-:61:${statement.openingDate}${statement.shortDate}${statement.currency}${transaction.amountText}NTRFNONREF//${transaction.reference}
-:86:010<00PAYMENT
-<10$seq
-<20$transaction.title
-#if ($transaction.line1)
-<27$transaction.line1
-#end
-#if ($transaction.line2)
-<28$transaction.line2
-#end
-#if ($transaction.line3)
-<29$transaction.line3
-#end
-#if ($transaction.line4)
-<60$transaction.line4
-#end
-<30$transaction.bic
-<38$transaction.account
+:61:${statement.openingDate}D${transaction.amountText}NMSCNONRE
+:86:$transaction.title
+$transaction.line1 $transaction.line2
+$transaction.line3 $transaction.line4
+$transaction.bic $transaction.account

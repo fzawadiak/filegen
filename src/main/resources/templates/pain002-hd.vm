@@ -28,4 +28,4 @@
 			<OrgnlMsgNmId>$message.messageId</OrgnlMsgNmId>
 		</OrgnlGrpInfAndSts> 
 		<OrgnlPmtInfAndSts>   
-			<OrgnlPmtInfId>$message.paymentId</OrgnlPmtInfId>    	
+			<OrgnlPmtInfId>$message.paymentId</OrgnlPmtInfId>

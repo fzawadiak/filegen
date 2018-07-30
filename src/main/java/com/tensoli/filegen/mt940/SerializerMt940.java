@@ -12,28 +12,23 @@ import com.tensoli.filegen.model.Statement;
 import com.tensoli.filegen.model.Transaction;
 
 public class SerializerMt940 {
+	static int seq = 0;
+	double delta = 0;
+	
 	Template header = Velocity.getTemplate("templates/mt940-hd.vm");
 	Template transaction = Velocity.getTemplate("templates/mt940-tx.vm");
 	Template footer = Velocity.getTemplate("templates/mt940-ft.vm");
 	
 	public String serialize(Statement msg, List<Transaction> txs) {
-		VelocityContext context = new VelocityContext();
-		context.put("statement", msg);
-		context.put("count", txs.size());
-
-		double delta = 0.0;
-		
 		StringWriter sw = new StringWriter();
-		header.merge(context, sw);
-		for(Transaction tx : txs) {
-			delta += tx.getAmount();
-			context.put("transaction", tx);
-			context.put("seq", System.nanoTime());
-			transaction.merge(context, sw);
-		}
-		msg.setClosingBalance(msg.getOpeningBalance()+delta);
-		footer.merge(context, sw);
-	
+		
+		serializeHeader(msg, txs.size(), sw);
+		
+		for(Transaction tx : txs)
+			serializeTransaction(msg,  tx, sw);
+		
+		serializeFooter(msg, txs.size(), sw);
+		
 		return sw.toString();
 	}
 	
@@ -49,11 +44,15 @@ public class SerializerMt940 {
 		VelocityContext context = new VelocityContext();
 		context.put("statement", msg);
 		context.put("transaction", tx);
+		context.put("seq", seq++);
+		delta += tx.getAmount();
 		
 		transaction.merge(context, w);
 	}
 	
 	public void serializeFooter(Statement msg, int count, Writer w) {
+		msg.setClosingBalance(msg.getOpeningBalance()+delta);
+		
 		VelocityContext context = new VelocityContext();
 		context.put("statement", msg);
 		context.put("count", count);

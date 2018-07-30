@@ -10,12 +10,12 @@ import com.tensoli.filegen.mt940.SerializerMt940;
 
 public class CreateMt940 extends AbstractCreator {
 	public void generateFile(String name, int payments) throws IOException {
-		FileWriter writer = new FileWriter(name);
-		
 		SerializerMt940 ser = new SerializerMt940();
 		
 		Party p = new Party();
-		parties.fillRandomParty(p);
+		String code = parties.fillRandomParty(p);
+		
+		FileWriter writer = new FileWriter(code + "/" + name);
 		
 		Statement stmt = new Statement();
 		stmt.setAccount(p.getAccount());
@@ -31,7 +31,7 @@ public class CreateMt940 extends AbstractCreator {
 			tx.setCurrency("CHF");
 			tx.setTitle("Payment");
 			tx.setAmount(1500.00);
-			parties.fillRandomParty(tx);
+			parties.fillRandomParty(tx, code);
 			
 			ser.serializeTransaction(stmt, tx, writer);
 		}

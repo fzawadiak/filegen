@@ -5,12 +5,11 @@
 	<artifactId>filegen</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Payment File Generator</name>
+	<description>This tool generates MT101, MT940 and Pain.001 files which can be used for performance testing of payment systems. It can also watch directory for Pain.001 and automatically create Pain.002 files in other directory.</description>
+	<scm>
+		<url>https://github.com/fzawadiak/filegen.git</url>
+	</scm>
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<version>2.22.0</version>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
@@ -46,6 +45,8 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
+					<finalName>filegen</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
@@ -59,5 +60,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<description>This tool generates MT101, MT940 and Pain.001 files which can be used for performance testing of payment systems.</description>
 </project>

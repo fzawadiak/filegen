@@ -6,7 +6,7 @@ public class Statement {
 	String currency;
 	String openingDate;
 	String closingDate;
-	Integer number = 0;
+	Integer number = 1;
 	Double openingBalance = 0.0;
 	Double closingBalance = 0.0;
 	public String getReference() {

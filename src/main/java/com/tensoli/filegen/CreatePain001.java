@@ -9,22 +9,22 @@ import com.tensoli.filegen.pain001.SerializerPain001;
 
 public class CreatePain001 extends AbstractCreator {
 	public void generateFile(String name, int payments) throws IOException {
-		FileWriter writer = new FileWriter(name);
-		
 		SerializerPain001 ser = new SerializerPain001();
 		
 		Message msg = new Message();
-		parties.fillRandomParty(msg);
+		String code = parties.fillRandomParty(msg);
 		msg.setExecutionDate(getDate());
+		
+		FileWriter writer = new FileWriter(code + "/" + name);
 		
 		ser.serializeHeader(msg, payments, writer);
 		
 		for(int i=0; i<payments; i++) {
 			Transaction tx = new Transaction();
-			tx.setCurrency("CHF");
+			tx.setCurrency("EUR");
 			tx.setTitle("Payment");
 			tx.setAmount(1500.00);
-			parties.fillRandomParty(tx);
+			parties.fillRandomParty(tx, code);
 			
 			ser.serializeTransaction(msg, tx, writer);
 		}

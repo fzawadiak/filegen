@@ -9,7 +9,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 import com.tensoli.filegen.model.Message;
-import com.tensoli.filegen.model.Party;
 import com.tensoli.filegen.model.Transaction;
 
 public class SerializerPain001 {
@@ -17,19 +16,16 @@ public class SerializerPain001 {
 	Template transaction = Velocity.getTemplate("templates/pain001-tx.vm");
 	Template footer = Velocity.getTemplate("templates/pain001-ft.vm");
 	
-	public String serialize(Party msg, List<Transaction> txs) {
-		VelocityContext context = new VelocityContext();
-		context.put("message", msg);
-		context.put("count", txs.size());
-
+	public String serialize(Message msg, List<Transaction> txs) {
 		StringWriter sw = new StringWriter();
-		header.merge(context, sw);
-		for(Transaction tx : txs) {
-			context.put("transaction", tx);
-			transaction.merge(context, sw);
-		}
-		footer.merge(context, sw);
-	
+		
+		serializeHeader(msg, txs.size(), sw);
+		
+		for(Transaction tx : txs)
+			serializeTransaction(msg,  tx, sw);
+		
+		serializeFooter(msg, txs.size(), sw);
+		
 		return sw.toString();
 	}
 	

@@ -1,7 +1,7 @@
 package com.tensoli.filegen.model;
 
 public class PaymentBlock {
-	String id = "PB"+System.nanoTime();
+	String id = "P"+System.nanoTime();
 	String messageId;
 	String paymentId;
 	

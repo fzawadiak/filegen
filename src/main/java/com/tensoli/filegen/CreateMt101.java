@@ -9,13 +9,13 @@ import com.tensoli.filegen.mt101.SerializerMt101;
 
 public class CreateMt101 extends AbstractCreator {	
 	public void generateFile(String name, int payments) throws IOException {
-		FileWriter writer = new FileWriter(name);
-		
 		SerializerMt101 ser = new SerializerMt101();
 		
 		Message msg = new Message();
-		parties.fillRandomParty(msg);
+		String code = parties.fillRandomParty(msg);
 		msg.setExecutionDate(getDate());
+		
+		FileWriter writer = new FileWriter(code + "/" + name);
 		
 		ser.serializeHeader(msg, payments, writer);
 		
@@ -24,7 +24,7 @@ public class CreateMt101 extends AbstractCreator {
 			tx.setCurrency("CHF");
 			tx.setTitle("Payment");
 			tx.setAmount(1500.00);
-			parties.fillRandomParty(tx);
+			parties.fillRandomParty(tx, code);
 			
 			ser.serializeTransaction(msg, tx, writer);
 		}

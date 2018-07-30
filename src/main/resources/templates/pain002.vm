@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03"> 
+	<CstmrPmtStsRpt> 
+		<GrpHdr>   
+			<MsgId>$message.id</MsgId>
+			<CreDtTm>2015-07-28T10:40:14Z</CreDtTm>
+			<InitgPty> 
+				<Nm>FIDES</Nm> 
+			</InitgPty>
+		</GrpHdr> 
+		<OrgnlGrpInfAndSts>   
+			<OrgnlMsgId>$message.messageId</OrgnlMsgId>
+			<OrgnlMsgNmId>$message.messageId</OrgnlMsgNmId>
+			<GrpSts>ACCP</GrpSts>	
+		</OrgnlGrpInfAndSts>
+	</CstmrPmtStsRpt> 
+</Document>

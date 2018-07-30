@@ -1,3 +1,2 @@
 :62F:C${statement.closingDate}${statement.currency}${statement.closingBalanceText}
-:64:C${statement.closingDate}${statement.currency}${statement.closingBalanceText}
--}{5:{CHK:617F1F26E63F}}{S:{COP:P}}
+-}{5:{CHK:123456789123}}

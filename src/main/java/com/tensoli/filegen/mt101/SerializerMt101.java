@@ -17,18 +17,15 @@ public class SerializerMt101 {
 	Template footer = Velocity.getTemplate("templates/mt101-ft.vm");
 	
 	public String serialize(Message msg, List<Transaction> txs) {
-		VelocityContext context = new VelocityContext();
-		context.put("message", msg);
-		context.put("count", txs.size());
-
 		StringWriter sw = new StringWriter();
-		header.merge(context, sw);
-		for(Transaction tx : txs) {
-			context.put("transaction", tx);
-			transaction.merge(context, sw);
-		}
-		footer.merge(context, sw);
-	
+		
+		serializeHeader(msg, txs.size(), sw);
+		
+		for(Transaction tx : txs)
+			serializeTransaction(msg,  tx, sw);
+		
+		serializeFooter(msg, txs.size(), sw);
+		
 		return sw.toString();
 	}
 	
