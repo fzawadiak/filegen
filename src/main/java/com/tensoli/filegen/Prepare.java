@@ -1,8 +1,6 @@
 package com.tensoli.filegen;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
