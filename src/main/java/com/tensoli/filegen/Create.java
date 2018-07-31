@@ -21,6 +21,8 @@ public class Create {
 	public String title;
 	@Parameter(names = "-split", description = "Split by channel based on CODE")
 	public boolean split = false;
+	@Parameter(names = "-delay", description = "Delay in ms between file creation")
+	public Integer delay;
 	@Parameter(names = "-accounts", description = "Location of accounts CSV")
 	public String accounts = "accounts.csv";
 	
@@ -73,6 +75,9 @@ public class Create {
 	    for(int fn=0; fn<files; fn++) {
 	    	String fname = String.format("%s-%s-%06d.%s", fileType, ts, fn, suffix);
 	    	creator.generateFile(fname, count);
+	    	
+	    	if(options.delay!=null)
+	    		Thread.sleep(options.delay);
 	    }
 	}
 	
