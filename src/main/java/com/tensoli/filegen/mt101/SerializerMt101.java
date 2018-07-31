@@ -12,9 +12,9 @@ import com.tensoli.filegen.model.Message;
 import com.tensoli.filegen.model.Transaction;
 
 public class SerializerMt101 {
-	Template header = Velocity.getTemplate("templates/mt101-hd.vm");
-	Template transaction = Velocity.getTemplate("templates/mt101-tx.vm");
-	Template footer = Velocity.getTemplate("templates/mt101-ft.vm");
+	static Template header = Velocity.getTemplate("templates/mt101-hd.vm");
+	static Template transaction = Velocity.getTemplate("templates/mt101-tx.vm");
+	static Template footer = Velocity.getTemplate("templates/mt101-ft.vm");
 	
 	public String serialize(Message msg, List<Transaction> txs) {
 		StringWriter sw = new StringWriter();

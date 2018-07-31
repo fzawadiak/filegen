@@ -12,10 +12,10 @@ import com.tensoli.filegen.model.PaymentBlock;
 import com.tensoli.filegen.model.PaymentInfo;
 
 public class SerializerPain002 {
-	Template full = Velocity.getTemplate("templates/pain002.vm");
-	Template header = Velocity.getTemplate("templates/pain002-hd.vm");
-	Template transaction = Velocity.getTemplate("templates/pain002-tx.vm");
-	Template footer = Velocity.getTemplate("templates/pain002-ft.vm");
+	static Template full = Velocity.getTemplate("templates/pain002.vm");
+	static Template header = Velocity.getTemplate("templates/pain002-hd.vm");
+	static Template transaction = Velocity.getTemplate("templates/pain002-tx.vm");
+	static Template footer = Velocity.getTemplate("templates/pain002-ft.vm");
 
 	public void serialize(PaymentBlock msg, Writer wr) {
 		VelocityContext context = new VelocityContext();

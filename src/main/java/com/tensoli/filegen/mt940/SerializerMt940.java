@@ -15,9 +15,9 @@ public class SerializerMt940 {
 	static int seq = 0;
 	double delta = 0;
 	
-	Template header = Velocity.getTemplate("templates/mt940-hd.vm");
-	Template transaction = Velocity.getTemplate("templates/mt940-tx.vm");
-	Template footer = Velocity.getTemplate("templates/mt940-ft.vm");
+	static Template header = Velocity.getTemplate("templates/mt940-hd.vm");
+	static Template transaction = Velocity.getTemplate("templates/mt940-tx.vm");
+	static Template footer = Velocity.getTemplate("templates/mt940-ft.vm");
 	
 	public String serialize(Statement msg, List<Transaction> txs) {
 		StringWriter sw = new StringWriter();
