@@ -32,8 +32,10 @@ public class Prepare {
 		for(PartyCode party : parties.getParties()) {
 			String code = party.getCode();
 			File dir = new File(code);
-			if(!dir.exists())
+			if(!dir.exists()) {
+				System.out.println("Creating "+code);
 				dir.mkdirs();
+			}
 		}
 	}
 	

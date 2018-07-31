@@ -19,8 +19,12 @@ public class Create {
 	public String currency;
 	@Parameter(names = "-title", description = "Title for payments")
 	public String title;
+	@Parameter(names = "-timestamp", description = "Put start timestamp as payment title")
+	public boolean timestamp = false;
 	@Parameter(names = "-split", description = "Split by channel based on CODE")
 	public boolean split = false;
+	@Parameter(names = "-verbose", description = "Show created file names")
+	public boolean verbose = false;
 	@Parameter(names = "-delay", description = "Delay in ms between file creation")
 	public Integer delay;
 	@Parameter(names = "-accounts", description = "Location of accounts CSV")
@@ -60,20 +64,27 @@ public class Create {
 	    	return;
 	    }
 	    
+	    String suffix = creator.getFileSuffix();
+	    String ts = formatter.format(new Date());
+	    
 	    if(options.amount!=null)
 	    	creator.setAmount(options.amount);
-	    if(options.title!=null)
-	    	creator.setTitle(options.title);
+	    if(options.timestamp) {
+	    	creator.setTitle("TS"+ts);
+	    } else {
+	    	if(options.title!=null)
+	    		creator.setTitle(options.title);
+	    }
 	    if(options.currency!=null)
 	    	creator.setCurrency(options.currency);
 	    creator.setSplit(options.split);
 	    
-	    String suffix = creator.getFileSuffix();
-	    String ts = formatter.format(new Date());
-	    
 	    creator.setParties(parties);
 	    for(int fn=0; fn<files; fn++) {
 	    	String fname = String.format("%s-%s-%06d.%s", fileType, ts, fn, suffix);
+	    	if(options.verbose)
+	    		System.out.println(fname);
+	    	
 	    	creator.generateFile(fname, count);
 	    	
 	    	if(options.delay!=null)
