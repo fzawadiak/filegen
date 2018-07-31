@@ -8,6 +8,10 @@ import com.tensoli.filegen.model.Transaction;
 import com.tensoli.filegen.pain001.SerializerPain001;
 
 public class CreatePain001 extends AbstractCreator {
+	public CreatePain001() {
+		currency = "EUR";
+	}
+	
 	public void generateFile(String name, int payments) throws IOException {
 		SerializerPain001 ser = new SerializerPain001();
 		
@@ -16,15 +20,15 @@ public class CreatePain001 extends AbstractCreator {
 		String account = msg.getAccount();
 		msg.setExecutionDate(getDate());
 		
-		FileWriter writer = new FileWriter(code + "/" + name);
+		FileWriter writer = new FileWriter(isSplit()?code + "/" + name : name);
 		
 		ser.serializeHeader(msg, payments, writer);
 		
 		for(int i=0; i<payments; i++) {
 			Transaction tx = new Transaction();
-			tx.setCurrency("EUR");
-			tx.setTitle("Payment");
-			tx.setAmount(1500.00);
+			tx.setCurrency(currency);
+			tx.setTitle(title);
+			tx.setAmount(amount);
 			parties.fillRandomParty(tx, account);
 			
 			ser.serializeTransaction(msg, tx, writer);

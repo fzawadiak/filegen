@@ -1,21 +1,45 @@
 package com.tensoli.filegen;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterDescription;
 import com.tensoli.filegen.data.PartyHolder;
 
 public class Create {
+	@Parameter
+	public List<String> parameters = new ArrayList<>();
+	@Parameter(names = "-amount", description = "Amount for payments")
+	public Double amount; 
+	@Parameter(names = "-currency", description = "Currency for payments")
+	public String currency;
+	@Parameter(names = "-title", description = "Title for payments")
+	public String title;
+	@Parameter(names = "-split", description = "Split by channel based on CODE")
+	public boolean split = false;
+	@Parameter(names = "-accounts", description = "Location of accounts CSV")
+	public String accounts = "accounts.csv";
+	
 	public static void main(String[] args) throws Exception {
-		if(args.length != 3) {
-			usage();
+		Create options = new Create();
+        JCommander cmd = JCommander.newBuilder()
+            .addObject(options)
+            .build();
+        cmd.parse(args);
+        
+		if(options.parameters.size() != 3) {
+			usage(cmd);
 			return;
 		}
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmss");
 		
 		PartyHolder parties = new PartyHolder();
-		parties.readFromCSV("accounts.csv");
+		parties.readFromCSV(options.accounts);
 	    
 	    String fileType = args[0];
 	    int count = Integer.parseInt(args[1]);
@@ -30,9 +54,17 @@ public class Create {
 	    } else if("mt940".equals(fileType)) {
 	    	creator = new CreateMt940();
 		} else {
-	    	usage();
+	    	usage(cmd);
 	    	return;
 	    }
+	    
+	    if(options.amount!=null)
+	    	creator.setAmount(options.amount);
+	    if(options.title!=null)
+	    	creator.setTitle(options.title);
+	    if(options.currency!=null)
+	    	creator.setCurrency(options.currency);
+	    creator.setSplit(options.split);
 	    
 	    String suffix = creator.getFileSuffix();
 	    String ts = formatter.format(new Date());
@@ -44,7 +76,11 @@ public class Create {
 	    }
 	}
 	
-	private static void usage() {
-		System.err.println("Usage: filegen create [mt101|mt940|pain001] <payments> <files>");
+	private static void usage(JCommander cmd) {
+		System.err.println("Usage: filegen create [mt101|mt940|pain001] <payments> <files> [options]");
+		System.err.println("Options:");
+		for(ParameterDescription opt : cmd.getParameters()) {
+			System.err.println(String.format("  %-10s %s", opt.getLongestName(), opt.getDescription()));
+		}
 	}
 }
