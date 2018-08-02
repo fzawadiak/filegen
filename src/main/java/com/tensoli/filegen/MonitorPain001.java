@@ -20,6 +20,7 @@ import com.tensoli.filegen.pain002.PaymentLevelBuilder;
 public class MonitorPain001 implements FileAlterationListener {
 	final Path indir;
 	final Path outdir;
+	long payments = 0;
 	
 	public MonitorPain001(Path indir, Path outdir) {
 		this.indir = indir;
@@ -57,12 +58,14 @@ public class MonitorPain001 implements FileAlterationListener {
 	}
 	
 	private void process(Path infile, Path outfile) {
-		System.out.println(String.format("Processing %s -> %s", infile, outfile));
+		System.out.print("Processing " + infile.getFileName());
 		
 		try {
-			process(infile.toFile(), outfile.toFile());
+			int pmnts = process(infile.toFile(), outfile.toFile());
+			payments += pmnts;
+			System.out.println(String.format(": %d payments (%d total)", pmnts, payments));
 		} catch(Exception e) {
-			System.err.println(e.getMessage());
+			System.err.println("\n"+e.getMessage());
 		}
 	}
 	
@@ -84,15 +87,17 @@ public class MonitorPain001 implements FileAlterationListener {
 		}
 	}
 	
-	private static void process(File infile, File outfile) throws Exception {
+	private static int process(File infile, File outfile) throws Exception {
 		FileReader in = new FileReader(infile);
 		FileWriter out = new FileWriter(outfile);
 		
 		PaymentLevelBuilder builder = new PaymentLevelBuilder();
-		builder.parse(in, out);
+		int pmnts = builder.parse(in, out);
 		
 		in.close();
 		out.close();
+		
+		return pmnts;
 	}
 	
 	private static void usage() {

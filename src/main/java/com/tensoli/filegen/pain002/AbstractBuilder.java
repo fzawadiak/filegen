@@ -4,5 +4,5 @@ import java.io.Reader;
 import java.io.Writer;
 
 public abstract class AbstractBuilder {
-	public abstract void parse(Reader in, Writer out) throws Exception;
+	public abstract int parse(Reader in, Writer out) throws Exception;
 }

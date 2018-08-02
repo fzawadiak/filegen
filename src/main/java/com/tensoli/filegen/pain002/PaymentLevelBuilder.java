@@ -20,6 +20,7 @@ public class PaymentLevelBuilder extends AbstractBuilder {
 		private String currentElement;
 		private PaymentBlock pb;
 		private PaymentInfo pi;
+		private int payments = 0;
 		private final SerializerPain002 out = new SerializerPain002();
 		
 		public HandlerPain001(Writer sw) {
@@ -57,6 +58,7 @@ public class PaymentLevelBuilder extends AbstractBuilder {
 			currentElement = qName;
 			if("CdtTrfTxInf".equalsIgnoreCase(currentElement)) {
 				pi = new PaymentInfo();
+				payments++;
 			}
 		}
 		@Override
@@ -67,10 +69,17 @@ public class PaymentLevelBuilder extends AbstractBuilder {
 			}
 		}
 		
+		public int getPayments() {
+			return payments;
+		}
 	}
-	public void parse(Reader in, Writer out) throws Exception {
+	
+	public int parse(Reader in, Writer out) throws Exception {
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 	    SAXParser parser = spf.newSAXParser();
-	    parser.parse(new InputSource(in), new HandlerPain001(out));
+	    HandlerPain001 handler = new HandlerPain001(out);
+	    parser.parse(new InputSource(in), handler);
+	    
+	    return handler.getPayments();
 	}
 }

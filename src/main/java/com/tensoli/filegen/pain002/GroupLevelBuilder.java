@@ -12,12 +12,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.tensoli.filegen.model.PaymentBlock;
+import com.tensoli.filegen.model.PaymentInfo;
 
 public class GroupLevelBuilder extends AbstractBuilder {
 	private class HandlerPain001 extends DefaultHandler {
 		private final Writer sw;
 		private String currentElement;
 		private PaymentBlock pb;
+		private int payments = 0;
 		private final SerializerPain002 out = new SerializerPain002();
 		
 		public HandlerPain001(Writer sw) {
@@ -46,16 +48,25 @@ public class GroupLevelBuilder extends AbstractBuilder {
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 			currentElement = qName;
+			if("CdtTrfTxInf".equalsIgnoreCase(currentElement)) {
+				payments++;
+			}
 		}
 		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException {
 			currentElement = null;
 		}
 		
+		public int getPayments() {
+			return payments;
+		}
 	}
-	public void parse(Reader in, Writer out) throws Exception {
+	public int parse(Reader in, Writer out) throws Exception {
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 	    SAXParser parser = spf.newSAXParser();
-	    parser.parse(new InputSource(in), new HandlerPain001(out));
+	    HandlerPain001 handler = new HandlerPain001(out);
+	    parser.parse(new InputSource(in), handler);
+	    
+	    return handler.getPayments();
 	}
 }
