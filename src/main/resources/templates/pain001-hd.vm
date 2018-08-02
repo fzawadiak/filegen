@@ -5,13 +5,8 @@
 			<MsgId>$message.senderReference</MsgId>
 			<CreDtTm>2018-03-13T07:45:52</CreDtTm>
 			<NbOfTxs>$count</NbOfTxs>
-			<CtrlSum>51476148.9</CtrlSum>
 			<InitgPty>
-				<Nm>Treuhand AG, Herr H. Muster</Nm>
-				<CtctDtls>
-					<Nm>CLX.PayMaker Office</Nm>
-					<Othr>3.0.98.0</Othr>
-				</CtctDtls>
+				<Nm>FIDES</Nm>
 			</InitgPty>
 		</GrpHdr>
 		<PmtInf>

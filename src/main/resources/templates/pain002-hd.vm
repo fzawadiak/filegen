@@ -5,22 +5,7 @@
 			<MsgId>$message.id</MsgId>
 			<CreDtTm>2015-07-28T10:40:14Z</CreDtTm>
 			<InitgPty> 
-				<Id> 
-					<OrgId> 
-						<Othr>   
-							<Id>NDEATEST</Id>  
-							<SchmeNm>   
-								<Cd>BANK</Cd>    
-							</SchmeNm>   
-						</Othr> 
-						<Othr>   
-							<Id>1825226354</Id>  
-							<SchmeNm>   
-								<Cd>CUST</Cd>    
-							</SchmeNm>   
-						</Othr>   
-					</OrgId>   
-				</Id>   
+				<Nm>FIDES</Nm> 
 			</InitgPty>   
 		</GrpHdr> 
 		<OrgnlGrpInfAndSts>   
