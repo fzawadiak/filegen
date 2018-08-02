@@ -67,6 +67,8 @@ public class Create {
 	    String suffix = creator.getFileSuffix();
 	    String ts = formatter.format(new Date());
 	    
+	    System.out.println(String.format("%s-%s", fileType, ts));
+	    
 	    if(options.amount!=null)
 	    	creator.setAmount(options.amount);
 	    if(options.timestamp) {
