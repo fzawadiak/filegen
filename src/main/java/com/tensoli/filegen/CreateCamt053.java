@@ -48,6 +48,6 @@ public class CreateCamt053 extends AbstractCreator {
 	}
 	
 	public String getFileSuffix() {
-		return "txt";
+		return "xml";
 	}
 }
