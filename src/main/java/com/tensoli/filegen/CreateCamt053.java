@@ -3,18 +3,18 @@ package com.tensoli.filegen;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.tensoli.filegen.camt053.SerializerCamt053;
 import com.tensoli.filegen.model.Party;
 import com.tensoli.filegen.model.Statement;
 import com.tensoli.filegen.model.Transaction;
-import com.tensoli.filegen.mt940.SerializerMt940;
 
-public class CreateMt940 extends AbstractCreator {
-	public CreateMt940() {
+public class CreateCamt053 extends AbstractCreator {
+	public CreateCamt053() {
 		currency = "CHF";
 	}
 	
 	public void generateFile(String name, int payments) throws IOException {
-		SerializerMt940 ser = new SerializerMt940();
+		SerializerCamt053 ser = new SerializerCamt053();
 		
 		Party p = new Party();
 		String code = parties.fillRandomParty(p);

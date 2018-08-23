@@ -31,11 +31,17 @@ public class Statement {
 	public String getOpeningDate() {
 		return openingDate;
 	}
+	public String getOpeningDateIso() {
+		return "20"+openingDate.substring(0, 2)+"-"+openingDate.substring(2, 4)+"-"+openingDate.substring(4, 6);
+	}
 	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
 	}
 	public String getClosingDate() {
 		return closingDate;
+	}
+	public String getClosingDateIso() {
+		return "20"+closingDate.substring(0, 2)+"-"+closingDate.substring(2, 4)+"-"+closingDate.substring(4, 6);
 	}
 	public void setClosingDate(String closingDate) {
 		this.closingDate = closingDate;

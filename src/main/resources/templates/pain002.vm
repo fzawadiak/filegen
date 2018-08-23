@@ -10,7 +10,7 @@
 		</GrpHdr> 
 		<OrgnlGrpInfAndSts>   
 			<OrgnlMsgId>$message.messageId</OrgnlMsgId>
-			<OrgnlMsgNmId>$message.messageId</OrgnlMsgNmId>
+			<OrgnlMsgNmId>pain.001.001.03</OrgnlMsgNmId>
 			<GrpSts>ACCP</GrpSts>	
 		</OrgnlGrpInfAndSts>
 	</CstmrPmtStsRpt> 

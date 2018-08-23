@@ -1,4 +1,4 @@
-package com.tensoli.filegen.mt940;
+package com.tensoli.filegen.camt053;
 
 import java.io.StringWriter;
 import java.io.Writer;
@@ -11,12 +11,13 @@ import org.apache.velocity.app.Velocity;
 import com.tensoli.filegen.model.Statement;
 import com.tensoli.filegen.model.Transaction;
 
-public class SerializerMt940 {
+public class SerializerCamt053 {
 	static int seq = 0;
+	double delta = 0;
 	
-	static Template header = Velocity.getTemplate("templates/mt940-hd.vm");
-	static Template transaction = Velocity.getTemplate("templates/mt940-tx.vm");
-	static Template footer = Velocity.getTemplate("templates/mt940-ft.vm");
+	static Template header = Velocity.getTemplate("templates/camt053-hd.vm");
+	static Template transaction = Velocity.getTemplate("templates/camt053-tx.vm");
+	static Template footer = Velocity.getTemplate("templates/camt053-ft.vm");
 	
 	public String serialize(Statement msg, List<Transaction> txs) {
 		StringWriter sw = new StringWriter();
@@ -44,11 +45,14 @@ public class SerializerMt940 {
 		context.put("statement", msg);
 		context.put("transaction", tx);
 		context.put("seq", seq++);
+		delta += tx.getAmount();
 		
 		transaction.merge(context, w);
 	}
 	
 	public void serializeFooter(Statement msg, int count, Writer w) {
+		msg.setClosingBalance(msg.getOpeningBalance()+delta);
+		
 		VelocityContext context = new VelocityContext();
 		context.put("statement", msg);
 		context.put("count", count);

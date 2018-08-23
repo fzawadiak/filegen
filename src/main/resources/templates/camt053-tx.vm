@@ -1,0 +1,35 @@
+			<Ntry>
+				<Amt Ccy="$statement.currency">$transaction.amountText</Amt>
+				<CdtDbtInd>DBIT</CdtDbtInd>
+				<Sts>BOOK</Sts>
+				<BookgDt>
+					<Dt>$statement.openingDateIso</Dt>
+				</BookgDt>
+				<ValDt>
+					<Dt>$statement.openingDateIso</Dt>
+				</ValDt>
+				<BkTxCd>
+					<Domn>
+						<Cd>PMNT</Cd>
+						<Fmly>
+							<Cd>ICDT</Cd>
+							<SubFmlyCd>AUTT</SubFmlyCd>
+						</Fmly>
+					</Domn>
+				</BkTxCd>
+				<NtryDtls>
+					<TxDtls>
+						<Amt Ccy="$statement.currency">$transaction.amountText</Amt>
+						<CdtDbtInd>DBIT</CdtDbtInd>
+						<BkTxCd>
+							<Domn>
+								<Cd>PMNT</Cd>
+								<Fmly>
+									<Cd>ICDT</Cd>
+									<SubFmlyCd>AUTT</SubFmlyCd>
+								</Fmly>
+							</Domn>
+						</BkTxCd>
+					</TxDtls>
+				</NtryDtls>
+			</Ntry>

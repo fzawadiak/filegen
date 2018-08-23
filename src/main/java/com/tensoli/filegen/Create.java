@@ -59,6 +59,8 @@ public class Create {
 	    	creator = new CreatePain001();
 	    } else if("mt940".equals(fileType)) {
 	    	creator = new CreateMt940();
+	    } else if("camt053".equals(fileType)) {
+	    	creator = new CreateCamt053();
 		} else {
 	    	usage(cmd);
 	    	return;
@@ -95,7 +97,7 @@ public class Create {
 	}
 	
 	private static void usage(JCommander cmd) {
-		System.err.println("Usage: filegen create [mt101|mt940|pain001] <payments> <files> [options]");
+		System.err.println("Usage: filegen create [mt101|mt940|pain001|camt053] <payments> <files> [options]");
 		System.err.println("Options:");
 		for(ParameterDescription opt : cmd.getParameters()) {
 			System.err.println(String.format("  %-10s %s", opt.getLongestName(), opt.getDescription()));

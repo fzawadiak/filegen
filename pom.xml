@@ -9,6 +9,10 @@
 	<scm>
 		<url>https://github.com/fzawadiak/filegen.git</url>
 	</scm>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
